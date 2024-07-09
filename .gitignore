@@ -1,0 +1,6 @@
+/HIFI3D/*
+!/HIFI3D/.gitkeep
+/ckpts/*
+!/ckpts/.gitkeep
+*.pyc
+exp/demo
