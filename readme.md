@@ -1,4 +1,5 @@
 # Text-Guided 3D Face Synthesis -- From Generation to Editing
+![teaser](assets/teaser.png)
 This repository is the official implementation of our work [FaceG2E](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_Text-Guided_3D_Face_Synthesis_-_From_Generation_to_Editing_CVPR_2024_paper.pdf) in CVPR2024.
 
 ## [Paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_Text-Guided_3D_Face_Synthesis_-_From_Generation_to_Editing_CVPR_2024_paper.pdf)  | [Project Page](https://faceg2e.github.io/) |  [Arxiv](https://arxiv.org/pdf/2312.00375)
