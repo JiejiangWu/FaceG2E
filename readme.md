@@ -1,8 +1,14 @@
-# Text-Guided 3D Face Synthesis -- From Generation to Editing
-![teaser](assets/teaser.png)
-This repository is the official implementation of our work [FaceG2E](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_Text-Guided_3D_Face_Synthesis_-_From_Generation_to_Editing_CVPR_2024_paper.pdf) in CVPR2024.
-
+# FaceG2E
 ## [Paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_Text-Guided_3D_Face_Synthesis_-_From_Generation_to_Editing_CVPR_2024_paper.pdf)  | [Project Page](https://faceg2e.github.io/) |  [Arxiv](https://arxiv.org/pdf/2312.00375)
+
+This repository is the official implementation of our work [FaceG2E](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_Text-Guided_3D_Face_Synthesis_-_From_Generation_to_Editing_CVPR_2024_paper.pdf).
+
+> **[Text-Guided 3D Face Synthesis -- From Generation to Editing](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_Text-Guided_3D_Face_Synthesis_-_From_Generation_to_Editing_CVPR_2024_paper.pdf)** </br>
+> Yunjie Wu, Yapeng Meng, Zhipeng Hu, Lincheng Li, Haoqian Wu, Kun Zhou, Weiwei Xu, Xin Yu</br>
+> In CVPR2024</br>
+> [FUXI AILab, Netease](https://fuxi.163.com/), Hangzhou, China
+![teaser](assets/teaser.png)
+
 
 
 ## Getting Started
