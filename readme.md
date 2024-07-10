@@ -59,15 +59,15 @@ The results are saved in `exp/demo`.
 ## Results
 ---
 Generation of `Scarlett Johansson`, `Cate Blanchett`, and `Tom Cruise`.
-![result_1](assets/results/resize_concat123.gif)
+![result_1](assets/results/resized_concat123.gif)
 
 
 Generation of `Neteyam in Avatar`, `Thanos`, and `Kratos`.
-![result_1](assets/results/resize_concat789.gif)
+![result_1](assets/results/resized_concat789.gif)
 
 
 Editing of `Make his eye mask blue`, `Make him chubby`, and `Turn his eyemask golden`.
-![result_1](assets/results/resize_edit456.gif)
+![result_1](assets/results/resized_edit456.gif)
 
 ## Contact
 ---
