@@ -1,0 +1,77 @@
+import bpy
+from bpy import context
+import os
+
+root_dir = r"D:\mesh_face\doc_ppt\paper\cvpr2024\exp-fig\ablation\gen-without-edit\objs"
+prompt_names = os.listdir(root_dir)
+
+suffix = '6'
+render_grey=False
+
+for name in prompt_names:
+    if not os.path.exists(os.path.join(root_dir, name, "1.obj")):
+        continue
+    if os.path.exists(os.path.join(root_dir, name+"_render"+suffix+".png")):
+        continue
+    
+    # import obj
+    bpy.ops.import_scene.obj(filepath=os.path.join(root_dir, name, "1.obj"))
+    obj_handle=bpy.context.selected_objects[0]
+    #print(bpy.context.selected_objects)
+
+    # location and pose
+    obj_handle.delta_location[2] = 0.13
+    obj_handle.delta_rotation_euler[0] = 0.
+    obj_handle.delta_rotation_euler[2] = -0.
+    #bpy.ops.object.shade_smooth(obj_handle)
+
+    # material
+    mat = obj_handle.active_material
+    print(mat.name)
+    # add diffuse_image node
+    diffuse_img = bpy.data.images.load(os.path.join(root_dir, name, "1.png"))
+    diffuse_img_node = mat.node_tree.nodes.new('ShaderNodeTexImage')
+    diffuse_img_node.image = diffuse_img
+    mat.node_tree.links.new(mat.node_tree.nodes.get('Principled BSDF').inputs.get("Base Color"), diffuse_img_node.outputs.get("Color"))
+    mat.node_tree.nodes.get('Principled BSDF').inputs["Metallic"].default_value = 0.05
+    mat.node_tree.nodes.get('Principled BSDF').inputs["Specular"].default_value= 0.1
+    mat.node_tree.nodes.get('Principled BSDF').inputs["Specular Tint"].default_value = 0.505
+    mat.node_tree.nodes.get('Principled BSDF').inputs["Roughness"].default_value = 0.509
+    mat.node_tree.nodes.get('Principled BSDF').inputs["Sheen"].default_value = 1.0
+    mat.node_tree.nodes.get('Principled BSDF').inputs["Sheen Tint"].default_value = 1.0
+
+    # add normal_image node
+    normal_img = bpy.data.images.load(r"D:\mesh_face\doc_ppt\paper\cvpr2024\exp-fig\teaser\assets\466.png")
+    normal_img.colorspace_settings.name = 'Non-Color'
+    normal_img_node = mat.node_tree.nodes.new('ShaderNodeTexImage')
+    normal_img_node.image = normal_img
+    # add normal map node
+    normal_node = mat.node_tree.nodes.new('ShaderNodeNormalMap')
+    normal_node.inputs["Strength"].default_value = 0.35
+    mat.node_tree.links.new(normal_node.inputs.get("Color"), normal_img_node.outputs.get("Color"))
+    mat.node_tree.links.new(mat.node_tree.nodes.get('Principled BSDF').inputs.get("Normal"), normal_node.outputs.get("Normal"))
+
+    # smooth shading
+    mesh = obj_handle.data
+    for f in mesh.polygons:
+        f.use_smooth = True
+
+    # render diffuse
+    bpy.context.scene.camera = bpy.data.objects['Camera']
+    bpy.ops.render.render()
+    bpy.data.images["Render Result"].save_render(os.path.join(root_dir, name+"_render"+suffix+".png"))
+
+    
+    if render_grey:
+        # remove diffuse
+        l = diffuse_img_node.outputs.get("Color").links[0]
+        mat.node_tree.links.remove(l)
+        mat.node_tree.nodes.get('Principled BSDF').inputs.get("Base Color").default_value = (0.164, 0.164, 0.164, 1.0)
+
+        # render grey
+        bpy.context.scene.camera = bpy.data.objects['Camera']
+        bpy.ops.render.render()
+        bpy.data.images["Render Result"].save_render(os.path.join(root_dir, name+"_render_grey.png"))
+
+    # delete obj
+    bpy.data.objects.remove(obj_handle)
